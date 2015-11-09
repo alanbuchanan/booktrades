@@ -2,21 +2,22 @@
 
 angular.module('booktradeBootstrapApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+    $scope.userInputBook = 'javascript';
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    $scope.books = [];
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
+    $scope.bookLookup = function () {
+      console.log('Doing a book lookup for ', $scope.userInputBook);
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+      $http.get('/api/books/' + $scope.userInputBook).success(function (data) {
+        console.log(data);
+        $scope.books = data;
+      }).error(function (error) {
+        console.log(error);
+      });
+    }
+
   });
+
+// TODO: routes on the backend
+// TODO: database schemas
