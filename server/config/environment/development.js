@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/booktradebootstrap-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };
