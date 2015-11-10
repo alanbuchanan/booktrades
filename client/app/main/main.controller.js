@@ -2,7 +2,11 @@
 
 angular.module('booktradeBootstrapApp')
   .controller('MainCtrl', function ($scope, $http) {
+
+    $scope.books = [];
+
     $http.get('/api/books').success(function (books) {
+      $scope.books = books;
       console.log('Books: ', books);
     }).error(function (error) {
       console.log('There was a problem: ', error);

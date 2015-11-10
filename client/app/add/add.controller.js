@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('AddCtrl', function ($scope, $http, $mdDialog) {
+  .controller('AddCtrl', function ($scope, $http, $mdDialog, Auth) {
     $scope.userInputBook = 'bible';
+
+    $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.books = [];
 
@@ -20,9 +22,10 @@ angular.module('booktradeBootstrapApp')
         $mdDialog.show(confirm).then(function() {
           var bookDetails = {
             id: book.id,
-            name: book.title,
+            title: book.title,
+            thumbnail: book.thumbnail,
             author: book.authors[0],
-            owner: 'herman',
+            owner: $scope.getCurrentUser().name,
             tradeRequests: []
           }
           $http.post('/api/books', bookDetails).success(function (data) {

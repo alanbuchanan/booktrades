@@ -4,7 +4,16 @@ var _ = require('lodash');
 var Book = require('./book.model');
 var books = require('google-books-search');
 
-// Get list of books
+// Get list of books from db
+exports.lookup = function (req, res) {
+  console.log('hello from lookup');
+  Book.find({}, function (err, books) {
+    if (err) return res.status(500).send(err);
+    res.status(200).json(books);
+  })
+};
+
+// Get list of books from google api
 exports.index = function(req, res) {
   console.log('user searched for: ', req.params.book);
   books.search(req.params.book, function(error, results) {

@@ -5,6 +5,7 @@ var controller = require('./book.controller');
 
 var router = express.Router();
 
+router.get('/', controller.lookup);
 router.get('/:book', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
