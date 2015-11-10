@@ -12,12 +12,13 @@ angular.module('booktradeBootstrapApp')
     $scope.bookIds = [];
 
     // User searched for a search term
-    //$scope.bookLookup = function () {
+    $scope.bookLookup = function () {
     console.log('Doing a book lookup for ', $scope.userInputBook);
 
+      // Populate books array with books from google books api that have a thumbnail and authors
     $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
       booksFromGoogleApi.forEach(function (book) {
-        if (book.hasOwnProperty('thumbnail')) {
+        if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
           $scope.books.push(book);
         }
       });
@@ -26,7 +27,7 @@ angular.module('booktradeBootstrapApp')
     }).error(function (error) {
       console.log(error);
     });
-    //}
+    }
 
     $scope.addBook = function (book) {
       console.log('hello from add book');
@@ -72,7 +73,7 @@ angular.module('booktradeBootstrapApp')
             id: book.id,
             title: book.title,
             thumbnail: book.thumbnail,
-            author: book.authors ? book.authors[0] : book.publisher,
+            author: book.authors[0],
             owner: $scope.getCurrentUser().name,
             tradeRequests: []
           };
