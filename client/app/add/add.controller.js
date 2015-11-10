@@ -55,7 +55,7 @@ angular.module('booktradeBootstrapApp')
             id: book.id,
             title: book.title,
             thumbnail: book.thumbnail,
-            author: book.authors[0],
+            author: book.authors ? book.authors[0] : book.publisher,
             owner: $scope.getCurrentUser().name,
             tradeRequests: []
           }
