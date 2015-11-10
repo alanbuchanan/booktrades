@@ -3,15 +3,19 @@
 angular.module('booktradeBootstrapApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'All books',
-      'link': '/'
-    },
+        'title': 'All books',
+        'link': '/'
+      },
       {
         'title': 'Add a book',
         link: '/add'
       },
       {
-        'title': 'Trade',
+        'title': 'My Books',
+        link: '/my-books'
+      },
+      {
+        'title': 'My Trades',
         link: '/trade'
       }];
 

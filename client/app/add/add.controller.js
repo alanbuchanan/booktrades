@@ -68,7 +68,7 @@ angular.module('booktradeBootstrapApp')
       };
     }
 
-    //$scope.bookLookup = function () {
+    $scope.bookLookup = function () {
     console.log('Doing a book lookup for ', $scope.userInputBook);
 
     $http.get('/api/books/' + $scope.userInputBook).success(function (data) {
@@ -77,6 +77,6 @@ angular.module('booktradeBootstrapApp')
     }).error(function (error) {
       console.log(error);
     });
-    //}
+    }
 
   });
