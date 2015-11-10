@@ -2,7 +2,7 @@
 
 angular.module('booktradeBootstrapApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.userInputBook = 'javascript';
+    $scope.userInputBook = '';
 
     $scope.books = [];
 

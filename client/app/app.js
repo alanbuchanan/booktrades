@@ -5,7 +5,8 @@ angular.module('booktradeBootstrapApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngMaterial'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
