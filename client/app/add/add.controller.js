@@ -39,7 +39,7 @@ angular.module('booktradeBootstrapApp')
             .ok('Got it!')
             .targetEvent(ev)
         );
-      };prevented
+      };
 
       var confirmAdd = function () {
         // Appending dialog to document.body to cover sidenav in docs app
