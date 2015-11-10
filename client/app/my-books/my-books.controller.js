@@ -16,4 +16,13 @@ angular.module('booktradeBootstrapApp')
     }).error(function (error) {
       console.log('There was a problem: ', error);
     })
+
+    $scope.removeMyBook = function (book) {
+      $http.delete('/api/books/' + book.id).success(function () {
+
+      }).error(function (error) {
+        console.log(error);
+      })
+    }
+
   });

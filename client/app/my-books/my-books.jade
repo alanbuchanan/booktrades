@@ -13,5 +13,6 @@ div.container
       md-tooltip Belongs to {{book.owner}}
       img(ng-src="{{book.thumbnail}}")
       md-grid-tile-footer
-        md-button.md-primary.md-raised(ng-click="") Trade
+        md-button.md-fab.md-primary.md-raised(ng-click="") Trade
+        md-button.md-fab.md-raised.md-mini.md-warn(ng-click="removeMyBook(book)") x
     md-grid-tile

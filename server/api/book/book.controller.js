@@ -61,7 +61,8 @@ exports.update = function(req, res) {
 
 // Deletes a book from the DB.
 exports.destroy = function(req, res) {
-  Book.findById(req.params.id, function (err, book) {
+  console.log('params: ', req.params);
+  Book.findOne({id: req.params.id}, function (err, book) {
     if(err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
     book.remove(function(err) {
