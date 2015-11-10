@@ -4,6 +4,15 @@ angular.module('booktradeBootstrapApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
 
+    // Testing with firstName with view to add lastName and location according to schema
+    $scope.user = {
+      firstName: ''
+    };
+
+    $scope.updateUserInfo = function () {
+      // TODO: find out if you need User or $http for this
+    };
+
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
