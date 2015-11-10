@@ -13,20 +13,21 @@ angular.module('booktradeBootstrapApp')
 
     // User searched for a search term
     $scope.bookLookup = function () {
-    console.log('Doing a book lookup for ', $scope.userInputBook);
+      $scope.books = [];
+      console.log('Doing a book lookup for ', $scope.userInputBook);
 
       // Populate books array with books from google books api that have a thumbnail and authors
-    $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
-      booksFromGoogleApi.forEach(function (book) {
-        if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
-          $scope.books.push(book);
-        }
-      });
+      $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
+        booksFromGoogleApi.forEach(function (book) {
+          if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
+            $scope.books.push(book);
+          }
+        });
 
-      console.log($scope.books);
-    }).error(function (error) {
-      console.log(error);
-    });
+        console.log($scope.books);
+      }).error(function (error) {
+        console.log(error);
+      });
     }
 
     $scope.addBook = function (book) {

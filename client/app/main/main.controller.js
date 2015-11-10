@@ -17,3 +17,6 @@ angular.module('booktradeBootstrapApp')
 // TODO: prevent user interacting with app if they are not logged in. always redirect to login
 // TODO: can trades view be done in an alert with dropdowns?
 // TODO: add material toast for UX when they add a book
+// TODO: message if nothing returned from 'add' search
+// tODO: loading spinner for 'add' search
+// TODO: improve footer on every ng-repeat item in `my-books` and `all books`
