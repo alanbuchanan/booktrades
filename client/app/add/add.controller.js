@@ -1,12 +1,40 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('AddCtrl', function ($scope, $http) {
-    $scope.userInputBook = '';
+  .controller('AddCtrl', function ($scope, $http, $mdDialog) {
+    $scope.userInputBook = 'bible';
 
     $scope.books = [];
 
-    $scope.bookLookup = function () {
+    $scope.addBook = function (book) {
+      console.log('hello from add book');
+
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+          .title('Would you like to add \'' + book.title + '\' to the collection?')
+          .content('This book will be added to the collection and tradeable with other users.')
+          .ariaLabel('Lucky day')
+          .targetEvent(book)
+          .ok('OK')
+          .cancel('Cancel');
+        $mdDialog.show(confirm).then(function() {
+          var bookDetails = {
+            id: book.id,
+            name: book.title,
+            author: book.authors[0],
+            owner: 'herman',
+            tradeRequests: []
+          }
+          $http.post('/api/books', bookDetails).success(function (data) {
+            console.log('Posted your book ', book.title);
+          })
+        }, function() {
+          $scope.status = 'You decided to keep your debt.';
+        });
+
+    }
+
+    //$scope.bookLookup = function () {
       console.log('Doing a book lookup for ', $scope.userInputBook);
 
       $http.get('/api/books/' + $scope.userInputBook).success(function (data) {
@@ -15,6 +43,6 @@ angular.module('booktradeBootstrapApp')
       }).error(function (error) {
         console.log(error);
       });
-    }
+    //}
 
   });

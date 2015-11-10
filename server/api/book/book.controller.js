@@ -29,6 +29,7 @@ exports.show = function(req, res) {
 
 // Creates a new book in the DB.
 exports.create = function(req, res) {
+  console.log('user chose to add:', req.body);
   Book.create(req.body, function(err, book) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(book);
