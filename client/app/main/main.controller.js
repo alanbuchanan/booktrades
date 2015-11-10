@@ -16,3 +16,4 @@ angular.module('booktradeBootstrapApp')
 // TODO: experiment with adding a book to books collection bearing in mind notes made
 // TODO: prevent user interacting with app if they are not logged in. always redirect to login
 // TODO: can trades view be done in an alert with dropdowns?
+// TODO: add material toast for UX when they add a book

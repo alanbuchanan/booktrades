@@ -24,11 +24,10 @@ div.container
       md-input-container
         input(placeholder='Search for a book', ng-model="userInputBook")
   h1 {{userInputBook}}
-  md-grid-list(md-cols-sm="1", md-cols-md="2", md-cols-gt-md="6", md-row-height-gt-md="1:2", md-row-height="4:3", md-gutter="20px", md-gutter-gt-sm="8px")
+  md-grid-list(md-cols-sm="1", md-cols-md="2", md-cols-gt-md="6", md-row-height-gt-md="1:2", md-row-height="4:3", md-gutter="20px", md-gutter-gt-sm="18px")
     md-grid-tile.gray(ng-repeat="book in books", md-colspan-sm="1")
       img(ng-src="{{book.thumbnail}}")
       md-grid-tile-footer
-        h3 {{book.title}}
         md-button.md-primary.md-raised(ng-click="addBook(book)") +
     md-grid-tile
 footer.footer
