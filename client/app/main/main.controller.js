@@ -38,6 +38,7 @@ angular.module('booktradeBootstrapApp')
         controller: 'TradeDialogCtrl',
         templateUrl: 'app/trade-dialog/trade-dialog.html',
         clickOutsideToClose:true,
+        // Pass in vals from MainCtrl
         locals: {
           userClickedBook: userClickedBook,
           usersBooks: $scope.usersBooks

@@ -1,12 +1,17 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 var TradeSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  wanted: {
+    user: String,
+    bookId: String
+  },
+  offered: {
+    user: String,
+    bookId: String
+  }
 });
 
 module.exports = mongoose.model('Trade', TradeSchema);
