@@ -5,6 +5,6 @@ angular.module('booktradeBootstrapApp')
     $routeProvider
       .when('/trade-dialog', {
         templateUrl: 'app/trade-dialog/trade-dialog.html',
-        controller: 'TradeDialogCtrl'
+        controller: 'MainCtrl'
       });
   });

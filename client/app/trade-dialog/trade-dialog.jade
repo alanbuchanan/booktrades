@@ -1,2 +1,21 @@
-.col-md-12
-    | This is the trade-dialog view.
+md-dialog(aria-label='Mango (Fruit)', ng-cloak='')
+  form
+    md-toolbar
+      .md-toolbar-tools
+        h2 Propose a Trade
+        span(flex='')
+        md-button.md-icon-button(ng-click='cancel()')
+          //md-icon(md-svg-src='', aria-label='Close dialog')
+    md-dialog-content(style='max-width:800px;max-height:810px; ')
+      .md-dialog-content
+        p Which of your books would you like to trade for '{{userClickedBook.title}}'?
+        md-input-container.md-block
+          label Favorite Number
+          md-select(name='myModel', ng-model='myModel', required='')
+            md-option(ng-repeat="book in usersBooks") {{book.title}}
+          .errors(ng-messages='myForm.myModel.$error', ng-if='myForm.$dirty')
+            div(ng-message='required') Required
+        div(layout='row')
+          md-button(ng-click='clearValue()', ng-disabled='!myModel', style='margin-right: 20px;') Clear
+          md-button.md-primary(ng-click='save()', ng-disabled='myForm.$invalid', layout='', layout-align='center end') Save
+
