@@ -44,7 +44,7 @@ angular.module('booktradeBootstrapApp')
         }
       })
         .then(function(answer) {
-          $scope.status = 'You said the information was "' + answer + '".';
+          console.log('Traded ' + userClickedBook.title + ' for ?');
         }, function() {
           $scope.status = 'You cancelled the dialog.';
         });
