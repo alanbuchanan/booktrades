@@ -10,6 +10,7 @@ var path = require('path');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/trades', require('./api/trade'));
   app.use('/api/books', require('./api/book'));
   app.use('/api/users', require('./api/user'));
 

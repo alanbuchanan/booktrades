@@ -13,5 +13,6 @@ div.container
       md-tooltip Belongs to {{book.owner}}
       img(ng-src="{{book.thumbnail}}")
       md-grid-tile-footer
-        md-button.md-primary.md-raised(ng-hide="isUsers(book)", ng-click="") Trade
+        p(ng-show="isUsers(book)") This is your book
+        md-button.md-primary.md-raised(ng-hide="isUsers(book)", ng-click="trade($event, book)") Trade
     md-grid-tile

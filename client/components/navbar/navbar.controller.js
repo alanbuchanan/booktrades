@@ -15,7 +15,7 @@ angular.module('booktradeBootstrapApp')
         link: '/my-books'
       },
       {
-        'title': 'My Trades',
+        'title': 'My Trade Requests',
         link: '/trade'
       }];
 
