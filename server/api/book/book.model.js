@@ -9,7 +9,14 @@ var BookSchema = new Schema({
   author: String,
   thumbnail: String,
   owner: String,
-  tradeRequests: [String]
+  tradeRequest: {
+    targetUser: String,
+    targetBook: {
+      id: String,
+      title: String,
+      thumbnail: String
+    }
+  }
 });
 
 module.exports = mongoose.model('Book', BookSchema);

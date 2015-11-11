@@ -76,7 +76,7 @@ angular.module('booktradeBootstrapApp')
             thumbnail: book.thumbnail,
             author: book.authors[0],
             owner: $scope.getCurrentUser().name,
-            tradeRequests: []
+            tradeRequest: {}
           };
           $http.post('/api/books', bookDetails).success(function (data) {
             console.log('Posted your book ', book.title);

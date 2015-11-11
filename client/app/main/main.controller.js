@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, Auth) {
+
+    $scope.getCurrentUser = Auth.getCurrentUser().name;
 
     $scope.books = [];
 
@@ -11,8 +13,13 @@ angular.module('booktradeBootstrapApp')
     }).error(function (error) {
       console.log('There was a problem: ', error);
     })
+
+    $scope.isUsers= function (book) {
+      return $scope.getCurrentUser === book.owner;
+    }
   });
 
+// TODO: fix schema for book trade
 // TODO: fix custom dialog, fix console error that comes up when you click trade in `my-books`. ideally move route to a separate file
 // TODO: Trades
 // TODO: prevent user interacting with app if they are not logged in. always redirect to login
