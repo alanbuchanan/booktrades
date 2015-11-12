@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $http) {
     $scope.menu = [{
-        'title': 'All books',
-        'link': '/'
-      },
+      'title': 'All books',
+      'link': '/'
+    },
       {
         'title': 'Add a book',
         link: '/add'
@@ -13,16 +13,13 @@ angular.module('booktradeBootstrapApp')
       {
         'title': 'My Books',
         link: '/my-books'
-      },
-      {
-        'title': 'My Trade Requests',
-        link: '/trade'
       }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.myTrades = [];
 
     $scope.logout = function () {
       Auth.logout();
