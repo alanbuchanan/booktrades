@@ -23,14 +23,12 @@ angular.module('booktradeBootstrapApp')
 
     getBooks();
 
-
-
     // Deletes a book from my-books
     $scope.removeMyBook = function (book) {
 
       var confirm = $mdDialog.confirm()
         .title('Are you sure you want to remove \'' + book.title + '\'?')
-        .content('')
+        .content('This will also remove any trade requests the book is part of.')
         .ok('Ok')
         .cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
@@ -39,9 +37,15 @@ angular.module('booktradeBootstrapApp')
         // error
       });
 
-
       var httpDelete = function () {
         $http.delete('/api/books/' + book.id).success(function () {
+          // Also delete trade req
+          $http.delete('/api/trades').success(function () {
+
+          }).error(function (error) {
+            console.log('error:', error);
+          });
+
           // Get books from db (again) to prevent dupes on front end: inefficient?
           getBooks();
         }).error(function (error) {
