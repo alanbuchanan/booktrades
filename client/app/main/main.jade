@@ -14,5 +14,5 @@ div.container
       img(ng-src="{{book.thumbnail}}")
       md-grid-tile-footer
         p(ng-show="isUsers(book)") This is your book
-        md-button.md-primary.md-raised(ng-hide="isUsers(book)", ng-click="trade($event, book)") Trade
+        md-button.md-primary.md-raised(ng-hide="isUsers(book)", ng-click="trade(book)") Trade
     md-grid-tile
