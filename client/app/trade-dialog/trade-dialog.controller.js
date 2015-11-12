@@ -10,7 +10,6 @@ angular.module('booktradeBootstrapApp')
 
     $http.get('/api/trades').success(function (trades) {
 
-
       // Compare trade IDs to book IDs
       trades.forEach(function (trade) {
         console.log('TRADE: ', trade);

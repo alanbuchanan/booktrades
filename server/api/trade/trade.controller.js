@@ -45,13 +45,33 @@ exports.update = function(req, res) {
 // Deletes a trade from the DB.
 exports.destroy = function(req, res) {
   Trade.findById(req.params.id, function (err, trade) {
+
     if(err) { return handleError(res, err); }
     if(!trade) { return res.status(404).send('Not Found'); }
+
     trade.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
   });
+};
+
+exports.deleteByTitle = function (req, res) {
+
+  console.log('req name:', req.params.name);
+  Trade.findOne({title: req.params.title}, function (err, trade) {
+
+    console.log('TRADE FROM DELETE:', trade);
+
+    if(err) { return handleError(res, err); }
+    if(!trade) { return res.status(404).send('Not Found'); }
+
+    trade.remove(function (err) {
+      if(err) { return handleError(res, err); }
+      return res.status(204).send('No Content');
+    })
+
+  })
 };
 
 function handleError(res, err) {
