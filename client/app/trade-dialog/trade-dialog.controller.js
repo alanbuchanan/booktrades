@@ -12,6 +12,8 @@ angular.module('booktradeBootstrapApp')
     console.log('userbook:', $scope.userClickedBook);
     console.log('usersBooks: ', $scope.usersBooks);
 
+    $scope.selected = {};
+
     var tradeItem = {
       wanted: {
         user:$scope.userClickedBook.owner,
@@ -25,6 +27,7 @@ angular.module('booktradeBootstrapApp')
 
     // User pressed 'save' on the trade dialog
     $scope.save = function () {
+
       $http.post('api/trades', tradeItem).success(function () {
 
       }).error(function (error) {
