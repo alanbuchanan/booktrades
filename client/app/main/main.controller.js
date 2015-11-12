@@ -1,8 +1,7 @@
-
 'use strict';
 angular.module('booktradeBootstrapApp')
 // User wants to trade a book
-.controller('MainCtrl', function ($scope, $http, Auth, $mdDialog) {
+  .controller('MainCtrl', function ($scope, $http, Auth, $mdDialog) {
 
 
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -30,25 +29,60 @@ angular.module('booktradeBootstrapApp')
     $scope.currentTradeBook = {};
 
     // User pressed trade button
-    $scope.trade = function (ev, userClickedBook) {
+    $scope.trade = function (userClickedBook) {
 
       $scope.currentTradeBook = userClickedBook;
 
-      $mdDialog.show({
-        controller: 'TradeDialogCtrl',
-        templateUrl: 'app/trade-dialog/trade-dialog.html',
-        clickOutsideToClose:true,
-        // Pass in vals from MainCtrl
-        locals: {
-          userClickedBook: userClickedBook,
-          usersBooks: $scope.usersBooks
-        }
-      })
-        .then(function(answer) {
-          console.log('Traded ' + userClickedBook.title + ' for ?');
-        }, function() {
-          $scope.status = 'You cancelled the dialog.';
+      $scope.idsList = [];
+
+      // Check if trade already exists for selected book
+      $http.get('/api/trades').success(function (trades) {
+
+        // Compare trade IDs to book IDs
+        trades.forEach(function (trade) {
+          console.log('TRADE: ', trade);
+          $scope.idsList.push(trade.offered.id);
+          $scope.idsList.push(trade.wanted.id);
         });
+
+        console.log('idslist:', $scope.idsList);
+
+        console.log('idsList index of ' + userClickedBook.id + ' is ' + $scope.idsList.indexOf(userClickedBook.id));
+
+        // Already being traded
+        if ($scope.idsList.indexOf(userClickedBook.id) !== -1) {
+
+          $mdDialog.show(
+            $mdDialog.alert()
+              .clickOutsideToClose(true)
+              .title('Book already being traded')
+              .content('Sorry, this book is already being traded by other users!')
+              .ok('Got it!')
+          );
+
+          // Not being traded
+        } else {
+
+          $mdDialog.show({
+            controller: 'TradeDialogCtrl',
+            templateUrl: 'app/trade-dialog/trade-dialog.html',
+            clickOutsideToClose: true,
+            // Pass in vals from MainCtrl
+            locals: {
+              userClickedBook: userClickedBook,
+              usersBooks: $scope.usersBooks
+            }
+          }).then(function (answer) {
+            //Success
+          }, function () {
+            //Error
+          });
+        }
+
+      }).error(function (error) {
+        console.log(error);
+      });
+
     };
 
     // Check if book belongs to user
@@ -57,12 +91,11 @@ angular.module('booktradeBootstrapApp')
     }
   });
 
-// TODO: fix schema for book trade
-// TODO: prevent user interacting with app if they are not logged in. always redirect to login
-// TODO: add material toast for UX when they add a book
-// TODO: If 0 trade requests in the `trade-requests` view, show a different message
+// TODO: UX/Addons:
 // TODO: loading spinner for 'add' search and every get request across site
-// TODO: why is scss showing errors in the 'messages' pane every time you create a route
-// TODO: improve footer on every ng-repeat item in `my-books` and `all books`
 // TODO: message if nothing returned from 'add' search
+// TODO: improve footer on every ng-repeat item in `my-books` and `all books`
+// TODO: add material toast for UX when they add a book
+// TODO: prevent user interacting with app if they are not logged in. always redirect to login
+// TODO: why is scss showing errors in the 'messages' pane every time you create a route
 // TODO: Fix top menu: it goes two-tier at a certain browser width
