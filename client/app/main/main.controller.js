@@ -3,12 +3,10 @@ angular.module('booktradeBootstrapApp')
 // User wants to trade a book
   .controller('MainCtrl', function ($scope, $http, Auth, $mdDialog) {
 
-
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.books = [];
     $scope.usersBooks = [];
-
 
     // Get list of all books from db
     $http.get('/api/books').success(function (books) {
@@ -49,8 +47,8 @@ angular.module('booktradeBootstrapApp')
 
         console.log('idsList index of ' + userClickedBook.id + ' is ' + $scope.idsList.indexOf(userClickedBook.id));
 
-        // Already being traded
         if ($scope.idsList.indexOf(userClickedBook.id) !== -1) {
+        // Already being traded
 
           $mdDialog.show(
             $mdDialog.alert()
@@ -60,8 +58,8 @@ angular.module('booktradeBootstrapApp')
               .ok('Got it!')
           );
 
-          // Not being traded
         } else {
+        // Not being traded
 
           $mdDialog.show({
             controller: 'TradeDialogCtrl',
@@ -99,3 +97,9 @@ angular.module('booktradeBootstrapApp')
 // TODO: prevent user interacting with app if they are not logged in. always redirect to login
 // TODO: why is scss showing errors in the 'messages' pane every time you create a route
 // TODO: Fix top menu: it goes two-tier at a certain browser width
+
+//TODO: When user deletes one of their books, also remove any trades associated with it
+//TODO: notification icon on 'My Trade Requests' if the user has any
+//TODO: if all the user's books are being traded, this requires yet another popup (can be left with empty dropdown)
+//TODO: toast 'add a book to start trading!' if usersBooks.length === 0
+//TODO: further testing
