@@ -26,3 +26,4 @@ angular.module('booktradeBootstrapApp')
 //TODO: perform get request to get book info from /api/books using id
 //TODO: implement accept or reject functionality
 //TODO: prevent any book in a current trade from being possible to trade: 'this book cannot be traded because it is part of an active trade'
+//TODO: amend `books` model and post reqs to remove `tradeRequests` property

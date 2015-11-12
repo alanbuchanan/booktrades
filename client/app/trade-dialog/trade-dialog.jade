@@ -13,7 +13,7 @@ md-dialog(aria-label='Trade', ng-cloak='')
         md-input-container.md-block
           label(for="mySelect") Your Books
           md-select(name="mySelect", ng-model='selected')
-            md-option(ng-repeat="book in usersBooks") {{book.title}}
+            md-option(ng-repeat="book in usersBooks", value="{{book}}") {{book.title}}
         div(layout='row')
           md-button(ng-click='cancelDialog()', style='margin-right: 20px;') Cancel
           md-button.md-primary(ng-click='save()', ng-disabled='myForm.$invalid', layout='', layout-align='center end') Ok

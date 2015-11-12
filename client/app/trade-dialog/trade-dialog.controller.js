@@ -14,25 +14,35 @@ angular.module('booktradeBootstrapApp')
 
     $scope.selected = {};
 
-    var tradeItem = {
+    $scope.tradeItem = {
       wanted: {
-        user:$scope.userClickedBook.owner,
+        user: $scope.userClickedBook.owner,
         bookId: $scope.userClickedBook.id
       },
       offered: {
-        user: $scope.usersBooks[0].owner,
-        bookId: $scope.usersBooks[0].id
+        user: '',
+        bookId: ''
       }
+
     };
 
     // User pressed 'save' on the trade dialog
     $scope.save = function () {
 
-      $http.post('api/trades', tradeItem).success(function () {
+      console.log('selected:', JSON.parse($scope.selected));
+      $scope.selected = JSON.parse($scope.selected);
+      console.log('typeof', typeof($scope.selected));
 
-      }).error(function (error) {
-        console.log('There was a problem: ', error);
-      })
+      $scope.tradeItem.offered = {
+        user: $scope.selected.owner,
+        bookId: $scope.selected.id
+      }
+
+      //$http.post('api/trades', tradeItem).success(function () {
+      console.log('tradeItem: ', $scope.tradeItem);
+      //}).error(function (error) {
+      //  console.log('There was a problem: ', error);
+      //})
       $scope.cancelDialog();
     };
 
