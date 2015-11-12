@@ -21,7 +21,44 @@ angular.module('booktradeBootstrapApp')
 
     }).error(function (error) {
       console.log('There was an error:', error);
-    })
+    });
+
+    // User clicked accept on a trade
+    $scope.acceptTrade = function (trade) {
+
+      // Perform owner swap in `books`
+      $scope.wantedUserTemp = trade.wanted.user;
+      $scope.offeredUserTemp = trade.offered.user;
+
+      $http.put('/api/books', {bookId: trade.offered.bookId, user: $scope.wantedUserTemp})
+        .success(function () {
+
+      }).error(function (error) {
+        console.log('problem PUTing:', error);
+      });
+
+      $http.put('/api/books/', {bookId: trade.wanted.bookId, user: $scope.offeredUserTemp})
+        .success(function () {
+
+      }).error(function (error) {
+        console.log('problem PUTing:', error);
+      });
+
+      // Send delete request
+
+      // Get `trades` list again
+
+      // Toast to confirm
+    };
+
+    // User clicked reject on a trade
+    $scope.rejectTrade = function (trade) {
+      // Send delete request
+
+      // Get `trades` list again
+
+      // Toast to confirm
+    };
 
     //$http.get('api/books').success(function (data) {
     //

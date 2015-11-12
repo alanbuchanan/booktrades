@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Book = require('./book.model');
 var books = require('google-books-search');
 
-// Get list of books from db
+// Gets list of books from db
 exports.lookup = function (req, res) {
   console.log('hello from lookup');
   Book.find({}, function (err, books) {
@@ -13,7 +13,7 @@ exports.lookup = function (req, res) {
   })
 };
 
-// Get list of books from google api
+// Gets list of books from google api
 exports.index = function(req, res) {
   console.log('user searched for: ', req.params.book);
   books.search(req.params.book, function(error, results) {
@@ -27,7 +27,7 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single book
+// Gets a single book
 exports.show = function(req, res) {
   Book.findById(req.params.id, function (err, book) {
     if(err) { return handleError(res, err); }
@@ -47,15 +47,24 @@ exports.create = function(req, res) {
 
 // Updates an existing book in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Book.findById(req.params.id, function (err, book) {
+  //if(req.body._id) { delete req.body._id; }
+  console.log('req', req.body);
+
+  Book.findOne({id: req.body.bookId}, function (err, book) {
+    console.log('ORIGINAL BOOK', book);
+    //console.log('newOwner:', req.body.user);
+    book.owner = req.body.user;
+
     if (err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(book, req.body);
+
+    var updated = _.merge(book, {owner: req.body.user});
+    console.log('UPDATED BOOK:', updated);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(book);
     });
+
   });
 };
 
