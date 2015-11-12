@@ -51,6 +51,10 @@ angular.module('booktradeBootstrapApp')
         });
     };
 
+    // Check if book belongs to user
+    $scope.isUsers = function (book) {
+      return $scope.getCurrentUser().name === book.owner;
+    }
   });
 
 // TODO: fix schema for book trade
@@ -62,4 +66,3 @@ angular.module('booktradeBootstrapApp')
 // TODO: improve footer on every ng-repeat item in `my-books` and `all books`
 // TODO: message if nothing returned from 'add' search
 // TODO: Fix top menu: it goes two-tier at a certain browser width
-//
