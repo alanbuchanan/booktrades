@@ -7,6 +7,7 @@ angular.module('booktradeBootstrapApp')
 
     $scope.trades = [];
 
+
     $http.get('/api/trades').success(function (trades) {
 
       // Trades should be composed of wanted username of trades from db
@@ -15,10 +16,19 @@ angular.module('booktradeBootstrapApp')
           $scope.trades.push(trade);
         }
       })
+
       console.log($scope.trades);
+
     }).error(function (error) {
       console.log('There was an error:', error);
     })
+
+    //$http.get('api/books').success(function (data) {
+    //
+    //}).error(function (error) {
+    //  console.log('problem:', error);
+    //})
+
   });
 
 //TODO: think of a way to layout numerous trade requests
@@ -27,3 +37,4 @@ angular.module('booktradeBootstrapApp')
 //TODO: implement accept or reject functionality
 //TODO: prevent any book in a current trade from being possible to trade: 'this book cannot be traded because it is part of an active trade'
 //TODO: amend `books` model and post reqs to remove `tradeRequests` property
+//TODO: improve get request in this file: don't get all trades and then foreach, search db by username instead
