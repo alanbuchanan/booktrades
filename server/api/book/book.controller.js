@@ -50,15 +50,14 @@ exports.update = function(req, res) {
   //if(req.body._id) { delete req.body._id; }
   console.log('req', req.body);
 
-  Book.findOne({id: req.body.bookId}, function (err, book) {
+  Book.findOne({id: req.body.id}, function (err, book) {
     console.log('ORIGINAL BOOK', book);
-    //console.log('newOwner:', req.body.user);
-    book.owner = req.body.user;
+    book.owner = req.body.owner;
 
     if (err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
 
-    var updated = _.merge(book, {owner: req.body.user});
+    var updated = _.merge(book, {owner: req.body.owner});
     console.log('UPDATED BOOK:', updated);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
