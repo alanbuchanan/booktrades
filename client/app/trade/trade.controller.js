@@ -42,14 +42,14 @@ angular.module('booktradeBootstrapApp')
       $scope.wantedUserTemp = trade.wanted.owner;
       $scope.offeredUserTemp = trade.offered.owner;
 
-      $http.put('/api/books', {bookId: trade.offered.id, owner: $scope.wantedUserTemp})
+      $http.put('/api/books', {id: trade.offered.id, owner: $scope.wantedUserTemp})
         .success(function () {
 
         }).error(function (error) {
           console.log('problem PUTing:', error);
         });
 
-      $http.put('/api/books/', {bookId: trade.wanted.id, owner: $scope.offeredUserTemp})
+      $http.put('/api/books/', {id: trade.wanted.id, owner: $scope.offeredUserTemp})
         .success(function () {
 
         }).error(function (error) {
@@ -94,4 +94,3 @@ angular.module('booktradeBootstrapApp')
 //TODO: perform get request to get book info from /api/books using id
 //TODO: prevent any book in a current trade from being possible to trade: 'this book cannot be traded because it is part of an active trade'
 //TODO: improve get request in this file: don't get all trades and then foreach, search db by username instead
-//
