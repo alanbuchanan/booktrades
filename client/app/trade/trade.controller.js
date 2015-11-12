@@ -7,21 +7,33 @@ angular.module('booktradeBootstrapApp')
 
     $scope.trades = [];
 
+    var getTrades = function () {
 
-    $http.get('/api/trades').success(function (trades) {
+      $scope.trades = [];
 
-      // Trades should be composed of wanted username of trades from db
-      trades.forEach(function (trade) {
-        if (trade.wanted.user === $scope.getCurrentUser().name) {
-          $scope.trades.push(trade);
-        }
+      $http.get('/api/trades').success(function (trades) {
+
+        // Trades should be composed of wanted username of trades from db
+        trades.forEach(function (trade) {
+          if (trade.wanted.user === $scope.getCurrentUser().name) {
+            $scope.trades.push(trade);
+          }
+        })
+        console.log($scope.trades);
+      }).error(function (error) {
+        console.log('There was an error:', error);
+      });
+    };
+
+    getTrades();
+
+    var remove = function (trade) {
+      $http.delete('/api/trades/' + trade._id).success(function () {
+        console.log('delete pressed');
+      }).error(function (error) {
+        console.log('error', error);
       })
-
-      console.log($scope.trades);
-
-    }).error(function (error) {
-      console.log('There was an error:', error);
-    });
+    };
 
     // User clicked accept on a trade
     $scope.acceptTrade = function (trade) {
@@ -30,32 +42,41 @@ angular.module('booktradeBootstrapApp')
       $scope.wantedUserTemp = trade.wanted.user;
       $scope.offeredUserTemp = trade.offered.user;
 
-      $http.put('/api/books', {bookId: trade.offered.bookId, user: $scope.wantedUserTemp})
+      var swapBook = {
+        bookId: trade.offered.bookId,
+        user: $scope.wantedUserTemp
+      }
+
+      $http.put('/api/books', {bookId: trade.offered.id, owner: $scope.wantedUserTemp})
         .success(function () {
 
-      }).error(function (error) {
-        console.log('problem PUTing:', error);
-      });
+        }).error(function (error) {
+          console.log('problem PUTing:', error);
+        });
 
-      $http.put('/api/books/', {bookId: trade.wanted.bookId, user: $scope.offeredUserTemp})
+      $http.put('/api/books/', {bookId: trade.wanted.id, owner: $scope.offeredUserTemp})
         .success(function () {
 
-      }).error(function (error) {
-        console.log('problem PUTing:', error);
-      });
+        }).error(function (error) {
+          console.log('problem PUTing:', error);
+        });
 
       // Send delete request
-
+      remove(trade);
       // Get `trades` list again
+      getTrades();
 
       // Toast to confirm
     };
 
     // User clicked reject on a trade
     $scope.rejectTrade = function (trade) {
+
       // Send delete request
+      remove(trade);
 
       // Get `trades` list again
+      getTrades();
 
       // Toast to confirm
     };
@@ -68,10 +89,7 @@ angular.module('booktradeBootstrapApp')
 
   });
 
-//TODO: think of a way to layout numerous trade requests
-//TODO: filter $scope.trades so that it's relative to the user
-//TODO: perform get request to get book info from /api/books using id
-//TODO: implement accept or reject functionality
-//TODO: prevent any book in a current trade from being possible to trade: 'this book cannot be traded because it is part of an active trade'
 //TODO: amend `books` model and post reqs to remove `tradeRequests` property
+//TODO: perform get request to get book info from /api/books using id
+//TODO: prevent any book in a current trade from being possible to trade: 'this book cannot be traded because it is part of an active trade'
 //TODO: improve get request in this file: don't get all trades and then foreach, search db by username instead

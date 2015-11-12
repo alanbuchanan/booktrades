@@ -9,40 +9,28 @@ angular.module('booktradeBootstrapApp')
 
     $scope.getCurrentUser = Auth.getCurrentUser;
 
-    console.log('userbook:', $scope.userClickedBook);
+    console.log('chosen book:', $scope.userClickedBook);
     console.log('usersBooks: ', $scope.usersBooks);
 
     $scope.selected = {};
 
-    $scope.tradeItem = {
-      wanted: {
-        user: $scope.userClickedBook.owner,
-        bookId: $scope.userClickedBook.id
-      },
-      offered: {
-        user: '',
-        bookId: ''
-      }
-
-    };
+    // Init trade item
+    $scope.tradeItem = {};
+    $scope.tradeItem.wanted = $scope.userClickedBook;
 
     // User pressed 'save' on the trade dialog
     $scope.save = function () {
 
-      console.log('selected:', JSON.parse($scope.selected));
       $scope.selected = JSON.parse($scope.selected);
-      console.log('typeof', typeof($scope.selected));
 
-      $scope.tradeItem.offered = {
-        user: $scope.selected.owner,
-        bookId: $scope.selected.id
-      }
+      // Append user's choice in this function to avoid potential async issues
+      $scope.tradeItem.offered = $scope.selected;
 
-      //$http.post('api/trades', tradeItem).success(function () {
-      console.log('tradeItem: ', $scope.tradeItem);
-      //}).error(function (error) {
-      //  console.log('There was a problem: ', error);
-      //})
+      $http.post('api/trades', $scope.tradeItem).success(function () {
+        console.log('tradeItem: ', $scope.tradeItem);
+      }).error(function (error) {
+        console.log('There was a problem: ', error);
+      })
       $scope.cancelDialog();
     };
 

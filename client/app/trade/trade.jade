@@ -3,7 +3,7 @@ div(ng-include='"components/navbar/navbar.html"')
 div.container
   h1 My Trade Requests
 
-  h3 You have {{trades.length}} trade requests:
+  h3 You have {{trades.length}} trade requests
 
   md-grid-list(ng-repeat="trade in trades", md-cols-sm="2", md-cols-md="3", md-cols-gt-md="4", md-row-height-gt-md="1:2", md-row-height="4:3", md-gutter="20px", md-gutter-gt-sm="8px")
     md-grid-tile.gray(md-colspan-sm="1")
@@ -13,7 +13,7 @@ div.container
       md-grid-tile-footer
         p(ng-show="isUsers(book)") This is your book
     md-grid-tile.gray(md-colspan-sm="1")
-      //img(ng-src="{{trade.wanted.bookId}}")
+      img(ng-src="{{getWantedImage(trade.wanted.bookId)}}")
       | {{trade.wanted.bookId}}
       p {{trade.wanted.user}}'s book
       md-grid-tile-footer

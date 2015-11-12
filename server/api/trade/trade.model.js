@@ -5,12 +5,18 @@ var mongoose = require('mongoose'),
 
 var TradeSchema = new Schema({
   wanted: {
-    user: String,
-    bookId: String
+    id: String,
+    title: String,
+    author: String,
+    thumbnail: String,
+    owner: String
   },
   offered: {
-    user: String,
-    bookId: String
+    id: String,
+    title: String,
+    author: String,
+    thumbnail: String,
+    owner: String
   }
 });
 
