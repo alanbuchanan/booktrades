@@ -9,11 +9,10 @@ md-dialog(aria-label='Trade', ng-cloak='')
     md-dialog-content(style='max-width:800px;max-height:810px; ')
       .md-dialog-content
         p Which of your books would you like to trade for '{{userClickedBook.title}}'?
-        p {{selected}}
         md-input-container.md-block
-          label(for="mySelect") Your Books
+          label(for="mySelect") Your Available Books
           md-select(name="mySelect", ng-model='selected')
-            md-option(ng-repeat="book in usersBooks", value="{{book}}") {{book.title}}
+            md-option(ng-repeat="book in booksToList", value="{{book}}") {{book.title}}
         div(layout='row')
           md-button(ng-click='cancelDialog()', style='margin-right: 20px;') Cancel
           md-button.md-primary(ng-click='save()', ng-disabled='myForm.$invalid', layout='', layout-align='center end') Ok
