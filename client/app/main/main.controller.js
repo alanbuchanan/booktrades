@@ -8,8 +8,11 @@ angular.module('booktradeBootstrapApp')
     $scope.books = [];
     $scope.usersBooks = [];
 
+    $scope.isLoading = false;
+
     // Get list of all books from db
     $http.get('/api/books').success(function (books) {
+      $scope.isLoading = true;
       $scope.books = books;
 
       // Get users books
@@ -18,6 +21,8 @@ angular.module('booktradeBootstrapApp')
           $scope.usersBooks.push(book);
         }
       })
+
+      $scope.isLoading = false;
 
       console.log('Books: ', books);
     }).error(function (error) {
@@ -36,6 +41,8 @@ angular.module('booktradeBootstrapApp')
       // Check if trade already exists for selected book
       $http.get('/api/trades').success(function (trades) {
 
+        $scope.isLoading = true;
+
         // Compare trade IDs to book IDs
         trades.forEach(function (trade) {
           console.log('TRADE: ', trade);
@@ -48,7 +55,7 @@ angular.module('booktradeBootstrapApp')
         console.log('idsList index of ' + userClickedBook.id + ' is ' + $scope.idsList.indexOf(userClickedBook.id));
 
         if ($scope.idsList.indexOf(userClickedBook.id) !== -1) {
-        // Already being traded
+          // Already being traded
 
           $mdDialog.show(
             $mdDialog.alert()
@@ -59,7 +66,7 @@ angular.module('booktradeBootstrapApp')
           );
 
         } else {
-        // Not being traded
+          // Not being traded
 
           $mdDialog.show({
             controller: 'TradeDialogCtrl',
@@ -77,11 +84,14 @@ angular.module('booktradeBootstrapApp')
           });
         }
 
+        $scope.isLoading = false;
+
       }).error(function (error) {
         console.log(error);
       });
 
     };
+
 
     // Check if book belongs to user
     $scope.isUsers = function (book) {
@@ -89,7 +99,6 @@ angular.module('booktradeBootstrapApp')
     }
   });
 
-// TODO: UX/Addons:
 // TODO: loading spinner for 'add' search and every get request across site
 // TODO: message if nothing returned from 'add' search
 // TODO: improve footer on every ng-repeat item in `my-books` and `all books`

@@ -11,6 +11,8 @@ angular.module('booktradeBootstrapApp')
 
     $scope.bookIds = [];
 
+    $scope.isLoading = false;
+
     // User searched for a search term
     $scope.bookLookup = function () {
       $scope.books = [];
@@ -18,11 +20,16 @@ angular.module('booktradeBootstrapApp')
 
       // Populate books array with books from google books api that have a thumbnail and authors
       $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
+
+        $scope.isLoading = true;
+
         booksFromGoogleApi.forEach(function (book) {
           if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
             $scope.books.push(book);
           }
         });
+
+        $scope.isLoading = false;
 
         console.log($scope.books);
       }).error(function (error) {
@@ -36,6 +43,8 @@ angular.module('booktradeBootstrapApp')
       // First, check for dupes
       $http.get('/api/books').success(function (dbBooks) {
 
+        $scope.isLoading = true;
+
         dbBooks.forEach(function (dbBook) {
           $scope.bookIds.push(dbBook.id);
         });
@@ -48,6 +57,9 @@ angular.module('booktradeBootstrapApp')
         } else {
           confirmAdd();
         }
+
+        $scope.isLoading = false;
+
       });
 
       var dupeMessage = function (ev) {
