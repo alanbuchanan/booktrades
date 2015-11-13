@@ -4,7 +4,9 @@
 angular.module('booktradeBootstrapApp')
   .controller('AddCtrl', function ($scope, $http, $mdDialog, Auth) {
 
-    $scope.userInputBook = 'helvete';
+    $scope.userInputBook = '';
+
+    $scope.nothingFound = '';
 
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.books = [];
@@ -16,6 +18,7 @@ angular.module('booktradeBootstrapApp')
     // User searched for a search term
     $scope.bookLookup = function () {
       $scope.books = [];
+      $scope.nothingFound = '';
       console.log('Doing a book lookup for ', $scope.userInputBook);
 
       // Populate books array with books from google books api that have a thumbnail and authors
@@ -23,15 +26,25 @@ angular.module('booktradeBootstrapApp')
 
         $scope.isLoading = true;
 
-        booksFromGoogleApi.forEach(function (book) {
-          if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
-            $scope.books.push(book);
-          }
-        });
+        // User entered something strange
+        if (booksFromGoogleApi.length === 0) {
+          $scope.isLoading = false;
+          $scope.nothingFound = 'Nothing found for \'' + $scope.userInputBook + '\'.';
 
-        $scope.isLoading = false;
+        } else {
 
-        console.log($scope.books);
+          booksFromGoogleApi.forEach(function (book) {
+            if (book.hasOwnProperty('thumbnail') && book.hasOwnProperty('authors')) {
+              $scope.books.push(book);
+            }
+          });
+
+          $scope.isLoading = false;
+
+          console.log($scope.books);
+
+        }
+
       }).error(function (error) {
         console.log(error);
       });
