@@ -2,18 +2,6 @@
 
 angular.module('booktradeBootstrapApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $http) {
-    $scope.menu = [{
-      'title': 'All books',
-      'link': '/'
-    },
-      {
-        'title': 'Add a book',
-        link: '/add'
-      },
-      {
-        'title': 'My Books',
-        link: '/my-books'
-      }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
