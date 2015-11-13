@@ -82,7 +82,7 @@ angular.module('booktradeBootstrapApp')
       }).error(function (error) {
         console.log(error);
       });
-    }
+    };
 
     $scope.addBook = function (book) {
       console.log('hello from add book');
@@ -136,10 +136,10 @@ angular.module('booktradeBootstrapApp')
             author: book.authors[0],
             owner: $scope.getCurrentUser().name
           };
-          $http.post('/api/books', bookDetails).success(function (data) {
+          $http.post('/api/books', bookDetails).success(function () {
             console.log('Posted your book ', book.title);
             $scope.showSimpleToast();
-          })
+          });
         }, function () {
           $scope.status = 'Unable to add that book.';
         });

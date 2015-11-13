@@ -19,7 +19,7 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/add")}')
           a(href='/add') Add a Book
 
-        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/add")}')
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/my-books")}')
           a(href='/my-books') My Books
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/trade")}')

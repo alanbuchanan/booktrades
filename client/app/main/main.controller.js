@@ -20,7 +20,7 @@ angular.module('booktradeBootstrapApp')
         if (book.owner === $scope.getCurrentUser().name) {
           $scope.usersBooks.push(book);
         }
-      })
+      });
 
       $scope.isLoading = false;
 
@@ -77,7 +77,7 @@ angular.module('booktradeBootstrapApp')
               userClickedBook: userClickedBook,
               usersBooks: $scope.usersBooks
             }
-          }).then(function (answer) {
+          }).then(function () {
             //Success
           }, function () {
             //Error
@@ -95,7 +95,7 @@ angular.module('booktradeBootstrapApp')
     // Check if book belongs to user
     $scope.isUsers = function (book) {
       return $scope.getCurrentUser().name === book.owner;
-    }
+    };
   });
 
 // TODO: why is scss showing errors in the 'messages' pane every time you create a route

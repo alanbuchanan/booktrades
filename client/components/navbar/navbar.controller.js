@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $http) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth) {
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

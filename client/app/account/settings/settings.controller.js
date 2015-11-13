@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth, $http, $location) {
+  .controller('SettingsCtrl', function ($scope, User, Auth, $http) {
 
     $scope.getCurrentUser = Auth.getCurrentUser;
 
