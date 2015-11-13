@@ -1,8 +1,8 @@
-$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-$fa-font-path: "/bower_components/font-awesome/fonts";
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "../bower_components/font-awesome/fonts";
 
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
-@import 'font-awesome/scss/font-awesome';
+@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import '../bower_components/font-awesome/scss/font-awesome';
 
 /**
  * App-wide Styles
@@ -15,8 +15,8 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
-// Component styles are injected through grunt
-// injector
+// Component styles are injected through grunt (injector and endinjector comments removed)
+
 @import 'account/login/login.scss';
 @import 'account/profile/profile.scss';
 @import 'add/add.scss';
@@ -25,5 +25,5 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'my-books/my-books.scss';
 @import 'trade-dialog/trade-dialog.scss';
 @import 'trade/trade.scss';
-@import 'modal/modal.scss';
-// endinjector
+@import '../components/modal/modal.scss';
+
