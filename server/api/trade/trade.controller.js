@@ -65,7 +65,7 @@ exports.deleteByTitle = function (req, res) {
     console.log('TRADE FROM DELETE:', trade);
 
     if(err) { return handleError(res, err); }
-    if(!trade) { return res.status(404).send('Not Found'); }
+    if(!trade) { return res.status(200).send('Not Found'); }
 
     trade.remove(function (err) {
       if(err) { return handleError(res, err); }

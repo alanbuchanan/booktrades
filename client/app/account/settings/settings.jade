@@ -14,7 +14,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .form-group
           label Location
           input.form-control(name='location', ng-model='user.location', ng-value='getCurrentUser().location', mongoose-error='')
-        button.btn.btn-lg.btn-primary(type='submit') Save info
+        button.btn.btn-lg.btn-primary(type='submit') Save Settings
         p {{info}}
   .row
     .col-sm-12
@@ -31,5 +31,5 @@ div(ng-include='"components/navbar/navbar.html"')
           input.form-control(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='')
           p.help-block(ng-show='(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)')
             | Password must be at least 3 characters.
-        button.btn.btn-lg.btn-primary(type='submit') Save password info
+        button.btn.btn-lg.btn-primary(type='submit') Save Password
         p {{message}}

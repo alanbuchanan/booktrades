@@ -27,12 +27,11 @@ angular.module('booktradeBootstrapApp')
     };
 
     $scope.changePassword = function (form) {
-      //TODO: toast for successful password change
       $scope.submitted = true;
       if (form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
           .then(function () {
-            $scope.message = 'Information successfuly changed.';
+            $scope.message = 'Password successfuly changed.';
           })
           .catch(function () {
             form.password.$setValidity('mongoose', false);

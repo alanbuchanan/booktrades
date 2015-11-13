@@ -99,16 +99,6 @@ angular.module('booktradeBootstrapApp')
     }
   });
 
-// TODO: loading spinner for 'add' search and every get request across site
-// TODO: message if nothing returned from 'add' search
-// TODO: improve footer on every ng-repeat item in `my-books` and `all books`
-// TODO: add material toast for UX when they add a book
 // TODO: prevent user interacting with app if they are not logged in. always redirect to login
 // TODO: why is scss showing errors in the 'messages' pane every time you create a route
-// TODO: Fix top menu: it goes two-tier at a certain browser width
-
-//TODO: When user deletes one of their books, also remove any trades associated with it
-//TODO: notification icon on 'My Trade Requests' if the user has any
-//TODO: if all the user's books are being traded, this requires yet another popup (can be left with empty dropdown)
-//TODO: toast 'add a book to start trading!' if usersBooks.length === 0
-//TODO: further testing
+//TODO: toasts and spinners need to be serviced or factoried really
