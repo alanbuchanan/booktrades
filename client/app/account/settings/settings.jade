@@ -3,7 +3,6 @@ div(ng-include='"components/navbar/navbar.html"')
   .row
     .col-sm-12
       h1 Settings
-      h2 {{user.fullName}}, {{user.location}}
     .col-sm-12
       form.form(name='form1', ng-submit='changeInfo()', novalidate='')
         .form-group
@@ -14,8 +13,9 @@ div(ng-include='"components/navbar/navbar.html"')
           input.form-control(name='name', ng-model='user.fullName', ng-value='getCurrentUser().fullName', mongoose-error='')
         .form-group
           label Location
-          input.form-control(name='location', ng-model='user.location', mongoose-error='')
+          input.form-control(name='location', ng-model='user.location', ng-value='getCurrentUser().location', mongoose-error='')
         button.btn.btn-lg.btn-primary(type='submit') Save info
+        p {{info}}
   .row
     .col-sm-12
       h1 Change Password
@@ -32,3 +32,4 @@ div(ng-include='"components/navbar/navbar.html"')
           p.help-block(ng-show='(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)')
             | Password must be at least 3 characters.
         button.btn.btn-lg.btn-primary(type='submit') Save password info
+        p {{message}}

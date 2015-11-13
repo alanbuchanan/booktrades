@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth, $http) {
+  .controller('SettingsCtrl', function ($scope, User, Auth, $http, $location) {
 
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.errors = {};
 
     $scope.message = '';
+
+    $scope.info = '';
 
     $scope.user = {
       name: $scope.getCurrentUser().name,
@@ -17,8 +19,9 @@ angular.module('booktradeBootstrapApp')
 
     $scope.changeInfo = function () {
       $http.put('/api/users', $scope.user).success(function () {
-
+        $scope.info = 'Information successfuly changed.';
       }).error(function (error) {
+        $scope.info = 'There was a problem with the information you entered.';
         console.log('error putting:', error);
       });
     };
