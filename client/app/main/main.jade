@@ -6,9 +6,10 @@ div.container
   div(ng-show="isLoading", layout="row", layout-sm="column", layout-align="space-around", id="spinner")
     md-progress-circular
 
-  md-grid-list(md-cols-sm="1", md-cols-md="2", md-cols-gt-md="6", md-row-height-gt-md="1:2", md-row-height="4:3", md-gutter="20px", md-gutter-gt-sm="8px")
+  md-grid-list(md-cols-sm="1", md-cols-md="2", md-cols-gt-md="6", md-row-height-gt-md="2:3", md-row-height="4:3", md-gutter="20px", md-gutter-gt-sm="8px")
     md-grid-tile.gray(ng-repeat="book in books", md-colspan-sm="1")
-      md-tooltip Belongs to {{book.owner}}
+      md-tooltip(ng-hide="usersBooks.length === 0") Belongs to {{book.owner}}
+      md-tooltip(ng-show="usersBooks.length === 0") Add a book to start trading
       img(ng-src="{{book.thumbnail}}")
       md-grid-tile-footer(ng-hide="usersBooks.length === 0")
         p(ng-show="isUsers(book)") This is your book

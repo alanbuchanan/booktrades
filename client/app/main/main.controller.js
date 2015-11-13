@@ -92,7 +92,6 @@ angular.module('booktradeBootstrapApp')
 
     };
 
-
     // Check if book belongs to user
     $scope.isUsers = function (book) {
       return $scope.getCurrentUser().name === book.owner;
