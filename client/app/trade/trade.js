@@ -5,6 +5,7 @@ angular.module('booktradeBootstrapApp')
     $routeProvider
       .when('/trade', {
         templateUrl: 'app/trade/trade.html',
-        controller: 'TradeCtrl'
+        controller: 'TradeCtrl',
+        authenticate: true
       });
   });
