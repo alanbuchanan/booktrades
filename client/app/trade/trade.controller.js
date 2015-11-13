@@ -90,3 +90,4 @@ angular.module('booktradeBootstrapApp')
   });
 
 //TODO: improve get request in this file: don't get all trades and then foreach, search db by username instead
+//TODO: enable target book to have multiple trade requests as you tested

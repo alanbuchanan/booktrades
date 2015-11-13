@@ -1,32 +1,41 @@
 'use strict';
 
 angular.module('booktradeBootstrapApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, User, Auth, $http) {
+
+    $scope.getCurrentUser = Auth.getCurrentUser;
+
     $scope.errors = {};
 
-    // Testing with firstName with view to add lastName and location according to schema
+    $scope.message = '';
+
     $scope.user = {
-      firstName: ''
+      name: $scope.getCurrentUser().name,
+      fullName: '',
+      location: ''
     };
 
-    $scope.updateUserInfo = function () {
-      // TODO: make a new view of profile info
-      // TODO: when user clicks settings wheel allow them to choose either password or profile from a dropdown
-      // TODO: change user settings, hopefully with a http put
+    $scope.changeInfo = function () {
+      $http.put('/api/users', $scope.user).success(function () {
+
+      }).error(function (error) {
+        console.log('error putting:', error);
+      });
     };
 
-    $scope.changePassword = function(form) {
+    $scope.changePassword = function (form) {
+      //TODO: toast for successful password change
       $scope.submitted = true;
-      if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
-        .then( function() {
-          $scope.message = 'Password successfully changed.';
-        })
-        .catch( function() {
-          form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
-        });
+      if (form.$valid) {
+        Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
+          .then(function () {
+            $scope.message = 'Information successfuly changed.';
+          })
+          .catch(function () {
+            form.password.$setValidity('mongoose', false);
+            $scope.errors.other = 'Incorrect password';
+            $scope.message = '';
+          });
       }
-		};
+    };
   });

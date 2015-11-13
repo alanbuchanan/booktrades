@@ -56,6 +56,7 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Deletes a trade by the name of the book in the trade.
 exports.deleteByTitle = function (req, res) {
 
   console.log('req name:', req.params.name);

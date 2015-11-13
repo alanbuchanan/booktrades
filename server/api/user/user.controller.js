@@ -2,6 +2,7 @@
 
 var User = require('./user.model');
 var passport = require('passport');
+var _ = require('lodash');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
@@ -100,6 +101,25 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
+/**
+ * Profile update
+ */
 exports.updateProfile = function (req, res, next) {
+  User.findOne({name: req.body.name}, function (err, user) {
 
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.status(404).send('Not Found'); }
+
+    var updated = _.merge(user, {
+      fullName: req.body.fullName,
+      location: req.body.location
+    });
+    console.log('UPDATED USER:', updated);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(user);
+    });
+
+  });
+  console.log('you sent:', req.body);
 };
