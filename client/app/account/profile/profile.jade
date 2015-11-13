@@ -1,0 +1,16 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  .row
+    .col-sm-12
+      h1 Profile
+    .col-sm-12
+      form.form(name='form2', ng-submit='updateUserInfo()', novalidate='')
+        .form-group
+          label First Name
+          input.form-control(type='firstName', name='firstName', value='user.firstName', ng-model='user.firstName', ng-minlength='2', required='')
+          label Last Name
+          input.form-control(type='lastName', name='lastName', value='user.lastName', ng-model='user.lastName', ng-minlength='2', required='')
+          label Location
+          input.form-control(type='location', name='location', value='user.location', ng-model='user.location', ng-minlength='2', required='')
+        p.help-block  {{ message }}
+        button.btn.btn-lg.btn-primary(type='submit') Save profile Info
