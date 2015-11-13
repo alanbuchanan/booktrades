@@ -98,6 +98,5 @@ angular.module('booktradeBootstrapApp')
     }
   });
 
-// TODO: prevent user interacting with app if they are not logged in. always redirect to login
 // TODO: why is scss showing errors in the 'messages' pane every time you create a route
-//TODO: toasts and spinners need to be serviced or factoried really
+// TODO: toasts and spinners need to be serviced or factoried really
