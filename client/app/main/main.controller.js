@@ -100,3 +100,4 @@ angular.module('booktradeBootstrapApp')
 
 // TODO: why is scss showing errors in the 'messages' pane every time you create a route
 // TODO: toasts and spinners need to be serviced or factoried really
+// TODO: fix user settings reset
