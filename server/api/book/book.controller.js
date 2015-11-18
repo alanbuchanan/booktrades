@@ -15,9 +15,9 @@ exports.lookup = function (req, res) {
 
 // Gets list of books from google api
 exports.index = function(req, res) {
-  console.log('user searched for: ', req.params.book);
+  console.log('user searched for:', req.params.book);
   books.search(req.params.book, function(error, results) {
-    if ( ! error ) {
+    if ( !error ) {
       console.log(results[0]);
       res.status(201).json(results);
     } else {
