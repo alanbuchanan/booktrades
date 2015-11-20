@@ -121,6 +121,3 @@ angular.module('booktradeBootstrapApp')
     }
 
   });
-
-//TODO: see what jonathan coleman wrote about it not updating when you delete
-//TODO: when you change your info, make it update there and then without having to refresh/logout
