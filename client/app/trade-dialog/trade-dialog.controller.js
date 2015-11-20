@@ -12,7 +12,6 @@ angular.module('booktradeBootstrapApp')
 
       // Compare trade IDs to book IDs
       trades.forEach(function (trade) {
-        console.log('TRADE: ', trade);
         $scope.idsList.push(trade.offered.id);
         $scope.idsList.push(trade.wanted.id);
       });
@@ -26,9 +25,6 @@ angular.module('booktradeBootstrapApp')
       $scope.userClickedBook = userClickedBook;
 
       $scope.getCurrentUser = Auth.getCurrentUser;
-
-      console.log('chosen book:', $scope.userClickedBook);
-      console.log('usersBooks: ', $scope.booksToList);
 
       $scope.selected = {};
 
@@ -45,7 +41,7 @@ angular.module('booktradeBootstrapApp')
         $scope.tradeItem.offered = $scope.selected;
 
         $http.post('api/trades', $scope.tradeItem).success(function () {
-          console.log('tradeItem: ', $scope.tradeItem);
+
         }).error(function (error) {
           console.log('There was a problem: ', error);
         })

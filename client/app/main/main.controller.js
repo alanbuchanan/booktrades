@@ -24,7 +24,6 @@ angular.module('booktradeBootstrapApp')
 
       $scope.isLoading = false;
 
-      console.log('Books: ', books);
     }).error(function (error) {
       console.log('There was a problem: ', error);
     });
@@ -45,14 +44,9 @@ angular.module('booktradeBootstrapApp')
 
         // Compare trade IDs to book IDs
         trades.forEach(function (trade) {
-          console.log('TRADE: ', trade);
           $scope.idsList.push(trade.offered.id);
           $scope.idsList.push(trade.wanted.id);
         });
-
-        console.log('idslist:', $scope.idsList);
-
-        console.log('idsList index of ' + userClickedBook.id + ' is ' + $scope.idsList.indexOf(userClickedBook.id));
 
         if ($scope.idsList.indexOf(userClickedBook.id) !== -1) {
           // Already being traded

@@ -53,7 +53,6 @@ angular.module('booktradeBootstrapApp')
     $scope.bookLookup = function () {
       $scope.books = [];
       $scope.nothingFound = '';
-      console.log('Doing a book lookup for ', $scope.userInputBook);
 
       // Populate books array with books from google books api that have a thumbnail and authors
       $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
@@ -75,8 +74,6 @@ angular.module('booktradeBootstrapApp')
 
           $scope.isLoading = false;
 
-          console.log($scope.books);
-
         }
 
       }).error(function (error) {
@@ -85,7 +82,6 @@ angular.module('booktradeBootstrapApp')
     };
 
     $scope.addBook = function (book) {
-      console.log('hello from add book');
 
       // First, check for dupes
       $http.get('/api/books').success(function (dbBooks) {
@@ -96,10 +92,7 @@ angular.module('booktradeBootstrapApp')
           $scope.bookIds.push(dbBook.id);
         });
 
-        console.log('IDs: ', $scope.bookIds);
-
         if ($scope.bookIds.indexOf(book.id) !== -1) {
-          console.log('DUPE FOUND');
           dupeMessage();
         } else {
           confirmAdd();
@@ -137,7 +130,6 @@ angular.module('booktradeBootstrapApp')
             owner: $scope.getCurrentUser().name
           };
           $http.post('/api/books', bookDetails).success(function () {
-            console.log('Posted your book ', book.title);
             $scope.showSimpleToast();
           });
         }, function () {

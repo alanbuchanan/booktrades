@@ -54,8 +54,7 @@ angular.module('booktradeBootstrapApp')
           if (trade.wanted.owner === $scope.getCurrentUser().name) {
             $scope.trades.push(trade);
           }
-        })
-        console.log($scope.trades);
+        });
       }).error(function (error) {
         console.log('There was an error:', error);
       });
@@ -65,7 +64,7 @@ angular.module('booktradeBootstrapApp')
 
     var remove = function (trade) {
       $http.delete('/api/trades/' + trade._id).success(function () {
-        console.log('delete pressed');
+
       }).error(function (error) {
         console.log('error', error);
       })
@@ -123,6 +122,5 @@ angular.module('booktradeBootstrapApp')
 
   });
 
-//TODO: remove console logs
 //TODO: see what jonathan coleman wrote about it not updating when you delete
 //TODO: when you change your info, make it update there and then without having to refresh/logout

@@ -49,7 +49,6 @@ angular.module('booktradeBootstrapApp')
             $scope.books.push(book)
           }
         });
-        console.log('Books: ', books);
       }).error(function (error) {
         console.log('There was a problem: ', error);
       })
