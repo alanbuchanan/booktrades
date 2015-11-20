@@ -12,8 +12,6 @@ angular.module('booktradeBootstrapApp')
     };
 
     $scope.updateUserInfo = function () {
-      // TODO: make a new view of profile info
-      // TODO: when user clicks settings wheel allow them to choose either password or profile from a dropdown
-      // TODO: change user settings, hopefully with a http put
+
     };
   });
