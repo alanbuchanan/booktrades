@@ -34,13 +34,13 @@ angular.module('booktradeBootstrapApp')
     $scope.trade = function (userClickedBook) {
 
       $scope.currentTradeBook = userClickedBook;
+      $scope.isLoading = true;
 
       $scope.idsList = [];
 
       // Check if trade already exists for selected book
       $http.get('/api/trades').success(function (trades) {
 
-        $scope.isLoading = true;
 
         // Compare trade IDs to book IDs
         trades.forEach(function (trade) {

@@ -53,11 +53,11 @@ angular.module('booktradeBootstrapApp')
     $scope.bookLookup = function () {
       $scope.books = [];
       $scope.nothingFound = '';
+      $scope.isLoading = true;
 
       // Populate books array with books from google books api that have a thumbnail and authors
       $http.get('/api/books/' + $scope.userInputBook).success(function (booksFromGoogleApi) {
 
-        $scope.isLoading = true;
 
         // User entered something strange
         if (booksFromGoogleApi.length === 0) {
