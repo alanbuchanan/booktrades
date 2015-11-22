@@ -17,7 +17,7 @@ exports.lookup = function (req, res) {
 exports.index = function(req, res) {
   console.log('user searched for:', req.params.book);
   books.search(req.params.book, function(error, results) {
-    if (!error) {
+    if ( !error ) {
       console.log(results[0]);
       res.status(201).json(results);
     } else {
