@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
-var books = require('google-books-search');
+var books = require('google-books-search-2');
 
 // Gets list of books from db
 exports.lookup = function (req, res) {
@@ -16,15 +16,24 @@ exports.lookup = function (req, res) {
 // Gets list of books from google api
 exports.index = function(req, res) {
   console.log('user searched for:', req.params.book);
-  books.search(req.params.book, function(error, results) {
-    if ( !error ) {
+  //books.search(req.params.book, function(error, results) {
+  //  if (!error) {
+  //    console.log(results[0]);
+  //    res.status(201).json(results);
+  //  } else {
+  //    console.log(error);
+  //    return res.status(404);
+  //  }
+  //});
+  books.search(req.params.book)
+    .then(function(results) {
       console.log(results[0]);
       res.status(201).json(results);
-    } else {
+    })
+    .catch(function(error) {
       console.log(error);
       return res.status(404);
-    }
-  });
+    });
 };
 
 // Gets a single book
