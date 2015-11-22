@@ -4,6 +4,16 @@ var _ = require('lodash');
 var Book = require('./book.model');
 var books = require('google-books-search-2');
 
+var options = {
+  key: "AIzaSyC6-UJyS_OJqLYqwvwSHLsN3UTEI_DmUaI",
+  offset: 0,
+  limit: 10,
+  type: 'books',
+  order: 'relevance',
+  lang: 'en'
+};
+
+
 // Gets list of books from db
 exports.lookup = function (req, res) {
   console.log('hello from lookup');
@@ -25,7 +35,7 @@ exports.index = function(req, res) {
   //    return res.status(404);
   //  }
   //});
-  books.search(req.params.book)
+  books.search(req.params.book, options)
     .then(function(results) {
       console.log(results[0]);
       res.status(201).json(results);
